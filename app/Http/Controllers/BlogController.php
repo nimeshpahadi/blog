@@ -10,7 +10,7 @@ use App\Post;
 class BlogController extends Controller
 {
     public function getIndex() {
-        $posts = Post::paginate(1);
+        $posts = Post::paginate(3);
 
         return view('blog.index')->withPosts($posts);
     }
