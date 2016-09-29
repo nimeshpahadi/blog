@@ -10,14 +10,6 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-          // Authentication routes
-Route::get('auth/login', 'Auth\LoginController@getLogin');
-Route::post('auth/login', 'Auth\LoinController@postLogin');
-Route::get('auth/login', 'Auth\LoinController@getLogout');
-
-          // Registration routes
-Route::get('auth/register', 'Auth\RegisterController@getRegister');
-Route::post('auth/register', 'Auth\RegisterController@postRegister');
 
 Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+');
 Route::get('blog', ['uses' => 'BlogController@getIndex', 'as' => 'blog.index']);
