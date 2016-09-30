@@ -23,3 +23,6 @@ Route::resource('posts', 'PostController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+             // Categories
+Route::resource('categories', 'CategoryController', ['except' => ['create']]);
