@@ -26,3 +26,4 @@ Route::get('/home', 'HomeController@index');
 
              // Categories
 Route::resource('categories', 'CategoryController', ['except' => ['create']]);
+Route::resource('tags', 'TagController', ['except' => ['create']]);
