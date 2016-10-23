@@ -24,6 +24,7 @@ class CommentsController extends Controller
      */
     public function store(Request $request, $post_id)
     {
+        dd($request->all());
         $this->validate($request, array(
            'name' => 'required|max:255',
             'email' => 'required|email|max:255',
@@ -101,5 +102,57 @@ class CommentsController extends Controller
         Session::flash('success', 'Deleted Comment');
 
         return redirect()->route('posts.show', $post_id);
+    }
+
+    public function getComment($comment_id)
+    {
+
+        $data = Comment::find($comment_id);
+        if(!$data){
+            $resp = [
+                "code"=>"404",
+                "message"=>"Commment not found"
+            ];
+            return json_encode($resp);
+        }
+
+
+        $data = $data->toArray();
+
+        return json_encode($data);
+
+
+    }
+
+
+    public function postComment(Request $request)
+    {
+        $data=$request->all();
+
+
+        $status = true;
+        $response['message']=[];
+
+        if(!isset($data['comment']))
+        {
+            $status=false;
+            array_push($response['message'],"Comment not defined.");
+        }
+
+
+        unset($data['_token']);
+
+        if($status)
+        {
+            $resp = Comment::create($data);
+
+            if($resp)
+            {
+                return json_encode(["message"=>"Comments created"]);
+            }
+        }
+
+
+        return json_encode($response);
     }
 }
